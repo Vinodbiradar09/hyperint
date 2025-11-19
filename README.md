@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- **Twilio WhatsApp API** for messaging  
+- **Upstash Redis** for rate-limiting  
+- **PostgreSQL** for database storage  
+- **Prisma** as the ORM  
+Environment Variables
 
-## Getting Started
+Create a `.env` (for local development) or `.env.production` (for Docker/production) in the project root with the following:
+# PostgreSQL
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
 
-First, run the development server:
+# Twilio WhatsApp
+TWILIO_ACCOUNT_SID=""
+TWILIO_AUTH_TOKEN=""
+TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Upstash Redis (for rate-limiting)
+UPSTASH_REDIS_REST_URL=""
+UPSTASH_REDIS_REST_TOKEN=""
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Replace the values with your credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Twilio Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a free Twilio account: https://www.twilio.com/try-twilio
 
-## Learn More
+Go to the WhatsApp Sandbox
 
-To learn more about Next.js, take a look at the following resources:
+Copy your Account SID, Auth Token, and Sandbox WhatsApp number
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Add them to your .env or .env.production file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Upstash Redis Setup
 
-## Deploy on Vercel
+Create a free Upstash Redis instance: https://console.upstash.com/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copy the REST URL and Token
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add them to your .env or .env.production file
+
+Upstash is cloud-based — no need to run a Redis container locally. Use these credentials even in local development.
+
+
+# Running with docker (recommended)
+1.Build and start containers
+  docker-compose up --build
+
+This will:
+
+Build the Next.js app
+
+Start PostgreSQL database
+
+Run Prisma migrations automatically
+
+Start the app on http://localhost:3000
+
+
+2.Stop containers
+  docker-compose down
+
+# Running without Docker (Local Development)
+1. Install dependencies
+  npm ci
+  # or
+  yarn
+  # or
+  pnpm install
+
+2. Run Prisma migrations
+   npx prisma migrate dev --name init
+
+3.Generate Prisma client
+  npx prisma generate
+
+4. Start development server
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+
+5. Access the app
+
+Open http://localhost:3000
+ in your browser.
+
+
+Deploy
+
+You can deploy on Vercel
+ directly.
+
+For Docker-based production, ensure .env.production contains all required variables and run:
+
+docker-compose up --build -d
+This will:
+
+Build the production image
+
+Start the PostgreSQL database
+
+Run Prisma migrations
+
+Start the app in detached mode
+ 
+   
+  
+   
+  
