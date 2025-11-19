@@ -9,13 +9,13 @@ Create a `.env` (for local development) or `.env.production` (for Docker/product
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
 
 # Twilio WhatsApp
-TWILIO_ACCOUNT_SID=""
-TWILIO_AUTH_TOKEN=""
+TWILIO_ACCOUNT_SID="your sid"
+TWILIO_AUTH_TOKEN="your auth token"
 TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
 
 # Upstash Redis (for rate-limiting)
-UPSTASH_REDIS_REST_URL=""
-UPSTASH_REDIS_REST_TOKEN=""
+UPSTASH_REDIS_REST_URL="your redis url"
+UPSTASH_REDIS_REST_TOKEN="your redis token"
 
 Replace the values with your credentials.
 
@@ -42,6 +42,7 @@ Upstash is cloud-based — no need to run a Redis container locally. Use these c
 
 # Running with docker (recommended)
 1.Build and start containers
+
   docker-compose up --build
 
 This will:
@@ -56,6 +57,7 @@ Start the app on http://localhost:3000
 
 
 2.Stop containers
+
   docker-compose down
 
 # Running without Docker (Local Development)
