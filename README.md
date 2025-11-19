@@ -40,57 +40,56 @@ Add them to your .env or .env.production file
 Upstash is cloud-based — no need to run a Redis container locally. Use these credentials even in local development.
 
 
-# Running with docker (recommended)
-1.Build and start containers
+# Running with Docker (Recommended)
+Build and start containers
 
-  docker-compose up --build
+docker-compose up --build
+
 
 This will:
 
 Build the Next.js app
 
-Start PostgreSQL database
+Start the PostgreSQL database
 
 Run Prisma migrations automatically
 
-Start the app on http://localhost:3000
+Start the app at http://localhost:3000
 
+Stop containers
 
-2.Stop containers
-
-  docker-compose down
+docker-compose down
 
 # Running without Docker (Local Development)
 1. Install dependencies
-  npm ci
-  # or
-  yarn
-  # or
-  pnpm install
+
+npm ci
+# or
+yarn
+# or
+pnpm install
 
 2. Run Prisma migrations
-   npx prisma migrate dev --name init
+npx prisma migrate dev --name init
 
-3.Generate Prisma client
-  npx prisma generate
+3. Generate Prisma client
+npx prisma generate
 
 4. Start development server
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 
 5. Access the app
 
 Open http://localhost:3000
- in your browser.
-
-
+in your browser.
+ 
 Deploy
 
-You can deploy on Vercel
- directly.
+You can deploy on Vercel directly.
 
 For Docker-based production, ensure .env.production contains all required variables and run:
 
